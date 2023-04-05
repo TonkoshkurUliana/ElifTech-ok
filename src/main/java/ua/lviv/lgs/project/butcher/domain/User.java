@@ -1,6 +1,6 @@
 package ua.lviv.lgs.project.butcher.domain;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name="users")
@@ -17,14 +17,33 @@ public class User {
     @Column(name="lastName")
     private String lastName;
 
-    @Column(name="role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @Column(name="password")
     private String password;
 
     public User() {}
-    public User (String email, String firstName, String lastName,String password, String role) {
+
+    public User(User user) {
+        this.id = user.id;
+        this.email = user.email;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.password = user.password;
+        this.role = user.role;
+    }
+
+    public User(String email, String firstName, String lastName, UserRole role, String password) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(Integer id, String email, String firstName, String lastName, UserRole role, String password) {
+        this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,11 +91,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

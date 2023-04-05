@@ -1,6 +1,6 @@
 package ua.lviv.lgs.project.butcher.domain;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.Date;
 import java.util.Objects;
