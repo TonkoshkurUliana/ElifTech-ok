@@ -1,13 +1,11 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,10 +42,10 @@
     <![endif]-->
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             var selItem = localStorage.getItem("locales");
             $('#locales').val(selItem ? selItem : 'en');
-            $("#locales").change(function() {
+            $("#locales").change(function () {
                 var selectedOption = $('#locales').val();
                 if (selectedOption) {
                     window.location.replace('?lang=' + selectedOption);
@@ -86,9 +84,11 @@
                             <li><a href="#!/pageHome">
                                 <div class="mText"><spring:message code='sidebar.home'/></div>
                             </a></li>
-                            <li class="with_ul"><a href="#!/pageAbout">
-                                <div class="mText"><spring:message code='sidebar.about'/></div>
-                            </a></li>
+                            <security:authorize access="hasRole('ROLE_USER')">
+                                <li class="with_ul"><a href="#!/pageAbout">
+                                    <div class="mText"><spring:message code='sidebar.about'/></div>
+                                </a></li>
+                            </security:authorize>
                             <li><a href="#!/pageDrinks">
                                 <div class="mText"><spring:message code='sidebar.drinks'/></div>
                             </a></li>
@@ -99,16 +99,19 @@
                             <li><a href="#!/pageServices">
                                 <div class="mText"><spring:message code='sidebar.services'/></div>
                             </a></li>
-                            <li><a href="#!/pageCreate">
-                                <div class="mText"><spring:message code='sidebar.create'/></div>
-                            </a></li>
-                            <li><a href="#!/pageBucket">
-                                <div class="mText"><spring:message code='sidebar.bucket'/></div>
-                            </a></li>
-                            <li><a href="#!/pageContact">
-                                <div class="mText"><spring:message code='sidebar.contacts'/></div>
-                            </a></li>
-
+                            <security:authorize access="hasRole('ROLE_USER')">
+                                <li><a href="#!/pageBucket">
+                                    <div class="mText"><spring:message code='sidebar.bucket'/></div>
+                                </a></li>
+                                <li><a href="#!/pageContact">
+                                    <div class="mText"><spring:message code='sidebar.contacts'/></div>
+                                </a></li>
+                            </security:authorize>
+                            <security:authorize access="hasRole('ROLE_ADMIN')">
+                                <li><a href="#!/pageCreate">
+                                    <div class="mText"><spring:message code='sidebar.create'/></div>
+                                </a></li>
+                            </security:authorize>
                         </ul>
                     </nav>
                 </div>
@@ -161,29 +164,31 @@
                                     Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan
                                     malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consect</p>
                                 <ul id="mycarousel-3" class="jcarousel-skin-tango3">
-                                        <c:forEach var="product" items="${products}">
-                                            <c:if test="${product.category == 'drink'}">
-                                    <li>
-                                        <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span
-                                                class="zoomSp2"></span><img src="images/page4_img_05.png" alt=""></a>
-                                        <h3 class="centr">${product.name}</h3>
-                                        <ul class="list2">
-                                            <li><a href="#" class=""><strong>${product.information}</strong></a><span>...${product.price}</span></li>
-                                        </ul>
+                                    <c:forEach var="product" items="${products}">
+                                        <c:if test="${product.category == 'drink'}">
+                                            <li>
+                                                <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span
+                                                        class="zoomSp2"></span><img src="images/page4_img_05.png"
+                                                                                    alt=""></a>
+                                                <h3 class="centr">${product.name}</h3>
+                                                <ul class="list2">
+                                                    <li><a href="#" class=""><strong>${product.information}</strong></a><span>...${product.price}</span>
+                                                    </li>
+                                                </ul>
 
-<%--                                        <security:authorize access="hasRole('USER')">--%>
+                                                <security:authorize access="hasRole('ROLE_USER')">
 
-                                            <form:form action="${contextPath}/bucket" method="POST"
-                                                       enctype="multipart/form-data">
-                                                <input type="hidden" value="${product.id}"
-                                                       class="form-control" name="productId">
-                                                <input type="submit" class="w3-button w3-block w3-dark-grey"
-                                                       value="+ <spring:message code='bucket.add'/>">
-                                            </form:form>
-<%--                                        </security:authorize>--%>
+                                                    <form:form action="${contextPath}/bucket" method="POST"
+                                                               enctype="multipart/form-data">
+                                                        <input type="hidden" value="${product.id}"
+                                                               class="form-control" name="productId">
+                                                        <input type="submit" class="w3-button w3-block w3-dark-grey"
+                                                               value="+ <spring:message code='bucket.add'/>">
+                                                    </form:form>
+                                                </security:authorize>
 
-                                        <div class="clear"></div>
-                                    </li>
+                                                <div class="clear"></div>
+                                            </li>
                                         </c:if>
                                     </c:forEach>
                                 </ul>
@@ -329,30 +334,30 @@
                                 <ul id="mycarousel-4" class="jcarousel-skin-tango4">
                                     <c:forEach var="product" items="${products}">
                                         <c:if test="${product.category == 'service'}">
-                                    <li>
-                                        <div class="wrap">
-                                            <img src="images/page5_img_01.png" class="img-indent" alt="">
-                                            <div class="extra-wrap">
-                                                <h3 class="marg5">${product.name}</h3>
-                                                <p class="date marg9"><strong>${product.price}$</strong></p>
-                                                <p class="">${product.information} </p>
-                                                </p>
-                                            </div>
-                                        </div>
+                                            <li>
+                                                <div class="wrap">
+                                                    <img src="images/page5_img_01.png" class="img-indent" alt="">
+                                                    <div class="extra-wrap">
+                                                        <h3 class="marg5">${product.name}</h3>
+                                                        <p class="date marg9"><strong>${product.price}$</strong></p>
+                                                        <p class="">${product.information} </p>
+                                                        </p>
+                                                    </div>
+                                                </div>
 
-                                        <security:authorize access="hasRole('USER')">
+                                                <security:authorize access="hasRole('ROLE_USER')">
 
-                                            <form:form action="${contextPath}/bucket" method="POST"
-                                                       enctype="multipart/form-data">
-                                                <input type="hidden" value="${product.id}"
-                                                       class="form-control" name="productId">
-                                                <input type="submit" class="w3-button w3-block w3-dark-grey"
-                                                       value="<spring:message code='bucket.add'/>">
-                                            </form:form>
-                                        </security:authorize>
+                                                    <form:form action="${contextPath}/bucket" method="POST"
+                                                               enctype="multipart/form-data">
+                                                        <input type="hidden" value="${product.id}"
+                                                               class="form-control" name="productId">
+                                                        <input type="submit" class="w3-button w3-block w3-dark-grey"
+                                                               value="<spring:message code='bucket.add'/>">
+                                                    </form:form>
+                                                </security:authorize>
 
-                                        <div class="clear"></div>
-                                        </li>
+                                                <div class="clear"></div>
+                                            </li>
                                         </c:if>
                                     </c:forEach>
                                 </ul>
@@ -393,7 +398,8 @@
                                                                enctype="multipart/form-data">
                                                         <input type="hidden" value="${bucket.id}"
                                                                class="form-control" name="bucketId">
-                                                        <td><a href="bucket?id= ${bucket.id}"><spring:message code='bucket.delete'/></a></td>
+                                                        <td><a href="bucket?id= ${bucket.id}"><spring:message
+                                                                code='bucket.delete'/></a></td>
                                                     </form:form>
 
                                                 </tr>
@@ -419,30 +425,36 @@
 
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="name" name="name"
-                                               value="${product.name}" placeholder="<spring:message code='product.name'/>">
+                                               value="${product.name}"
+                                               placeholder="<spring:message code='product.name'/>">
                                     </div>
 
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="information" name="information"
-                                               value="${product.information}" placeholder="<spring:message code='product.information'/>">
+                                               value="${product.information}"
+                                               placeholder="<spring:message code='product.information'/>">
                                     </div>
 
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="price" name="price"
-                                               value="${product.price}" placeholder="<spring:message code='product.price'/>">
+                                               value="${product.price}"
+                                               placeholder="<spring:message code='product.price'/>">
                                     </div>
 
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="category" name="category"
-                                               value="${product.category}" placeholder="<spring:message code='product.category'/>">
+                                               value="${product.category}"
+                                               placeholder="<spring:message code='product.category'/>">
                                     </div>
 
                                     <div class="form-group">
                                         <input type="file" class="form-control" id="image" name="image"
-                                               value="${product.image}" placeholder="<spring:message code='product.file'/>">
+                                               value="${product.image}"
+                                               placeholder="<spring:message code='product.file'/>">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary"><spring:message code='product.submit'/></button>
+                                    <button type="submit" class="btn btn-primary"><spring:message
+                                            code='product.submit'/></button>
 
                                     <input type="hidden" name="${_csrf.parameterName}"
                                            value="${_csrf.token}"/>

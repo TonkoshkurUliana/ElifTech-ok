@@ -24,7 +24,7 @@ public class UserService {
         logger.info("Register new user {} : " + user);
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(UserRole.USER);
+        user.setRole(UserRole.ROLE_USER);
         userRepository.save(user);
     }
 
