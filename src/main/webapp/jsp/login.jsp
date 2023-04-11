@@ -17,7 +17,7 @@
     <meta name="author" content="">
 
     <title>Log in with your account</title>
-    <link type="text/css" href="login.css" rel="stylesheet">
+    <link type="text/css" href="../css/login.css" rel="stylesheet">
     <link
             href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
             rel="stylesheet" id="bootstrap-css">

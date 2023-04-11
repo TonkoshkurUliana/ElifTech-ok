@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ua.lviv.lgs.project.butcher.domain.User;
+import ua.lviv.lgs.project.butcher.service.BucketService;
 import ua.lviv.lgs.project.butcher.service.ProductService;
 import ua.lviv.lgs.project.butcher.service.UserService;
 
@@ -19,6 +20,8 @@ public class UserController {
 
     @Autowired
     private ProductService productService ;
+    @Autowired
+    private BucketService bucketService ;
 
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -29,7 +32,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("    userForm") User userForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "registration";
@@ -37,7 +40,7 @@ public class UserController {
         userService.save(userForm);
 
 
-        return "redirect:/home";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
@@ -51,16 +54,16 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value ="/home", method = RequestMethod.GET)
+    @RequestMapping(value ="/index", method = RequestMethod.GET)
     public ModelAndView welcome() {
-        ModelAndView map = new ModelAndView("home");
+        ModelAndView map = new ModelAndView("index");
         map.addObject("products", productService.getAllProducts());
-
+        map.addObject("bucketItems", bucketService.getAll());
         return map;
     }
 
-//    @RequestMapping(value ="/create-periodical", method = RequestMethod.GET)
-//    public String createPeriodical() {
-//        return "createPeriodical";
-//    }
+    @RequestMapping(value ="/create", method = RequestMethod.GET)
+    public String createProduct() {
+        return "create";
+    }
 }

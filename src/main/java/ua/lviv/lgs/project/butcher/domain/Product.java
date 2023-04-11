@@ -12,8 +12,16 @@ public class Product {
     private String name;
     @Column (name="information")
     private String information;
+
+    @Column (name="category")
+    private String category;
     @Column (name="price")
     private Double  price;
+
+    @Lob
+    private String encodedImage;
+
+
 
     public Product(String name, String information, Double price) {
         this.name = name;
@@ -55,6 +63,21 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getEncodedImage() {
+        return encodedImage;
+    }
+
+    public void setEncodedImage(String encodedImage) {
+        this.encodedImage = encodedImage;
+    }
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
     @Override
     public int hashCode() {

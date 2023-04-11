@@ -13,7 +13,7 @@ public class Bucket {
     private Integer id;
     @Column (name="userId")
     private Integer userId;
-    @Column(name="magazineId")
+    @Column(name="productId")
     private Integer productId;
     @Column (name="purchaseDate")
     private Date purchaseDate;
@@ -27,6 +27,10 @@ public class Bucket {
 
     public Bucket() {
 
+    }
+
+    public Bucket(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
