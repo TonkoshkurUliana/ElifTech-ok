@@ -11,27 +11,41 @@ public class Bucket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column (name="userId")
-    private Integer userId;
-    @Column(name="productId")
-    private Integer productId;
+
+    @ManyToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "productId", referencedColumnName = "id")
+    private Product product;
     @Column (name="purchaseDate")
     private Date purchaseDate;
 
 
-    public Bucket(Integer userId, Integer productId, Date purchaseDate) {
-        this.userId = userId;
-        this.productId = productId;
-        this.purchaseDate = purchaseDate;
-    }
-
-    public Bucket() {
-
+   public Bucket() {
     }
 
     public Bucket(Integer id) {
         this.id = id;
     }
+
+    public Bucket(User user, Product product, Date purchaseDate) {
+        super();
+        this.user = user;
+        this.product = product;
+        this.purchaseDate = purchaseDate;
+    }
+
+    public Bucket(Integer id, User user, Product product, Date purchaseDate) {
+        super();
+        this.id = id;
+        this.user = user;
+        this.product = product;
+        this.purchaseDate = purchaseDate;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -41,20 +55,20 @@ public class Bucket {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Date getPurchaseDate() {
@@ -75,20 +89,20 @@ public class Bucket {
                 return false;
         } else if (!id.equals(bucket.id))
             return false;
-        if (productId == null) {
-            if (bucket.productId != null)
+        if (product == null) {
+            if (bucket.product!= null)
                 return false;
-        } else if (!productId.equals(bucket.productId))
+        } else if (!product.equals(bucket.product))
             return false;
         if (purchaseDate == null) {
             if (bucket.purchaseDate != null)
                 return false;
         } else if (!purchaseDate.equals(bucket.purchaseDate))
             return false;
-        if (userId == null) {
-            if (bucket.userId != null)
+        if (user == null) {
+            if (bucket.user != null)
                 return false;
-        } else if (!userId.equals(bucket.userId))
+        } else if (!user.equals(bucket.user))
             return false;
         return true;
     }
@@ -99,8 +113,8 @@ public class Bucket {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-        result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        result = prime * result + ((product == null) ? 0 : product.hashCode());
         result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
         return result;
     }
@@ -109,8 +123,8 @@ public class Bucket {
     public String toString() {
         return "Bucket{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", productId=" + productId +
+                ", userId=" + user +
+                ", productId=" + product+
                 ", purchaseDate=" + purchaseDate +
                 '}';
     }

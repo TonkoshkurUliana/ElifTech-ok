@@ -38,18 +38,16 @@ public class BucketController {
     public ModelAndView create(@RequestParam String productId) {
         Product product = productService.findById(Integer.parseInt(productId));
 
-        System.out.println("hh"+product);
         Bucket bucket = new Bucket();
-        bucket.setProductId(product.getId());
+        bucket.setProduct(product);
         bucket.setPurchaseDate(new Date());
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = auth.getName();
         User user = userService.findByEmail(userEmail);
-        bucket.setUserId(user.getId());
+        bucket.setUser(user);
 
         bucketService.add(bucket);
-        System.out.println(bucket);
         return getBucketItems();
     }
 

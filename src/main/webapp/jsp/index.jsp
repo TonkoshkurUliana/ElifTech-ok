@@ -347,7 +347,7 @@
                                                 <input type="hidden" value="${product.id}"
                                                        class="form-control" name="productId">
                                                 <input type="submit" class="w3-button w3-block w3-dark-grey"
-                                                       value="+ <spring:message code='bucket.add'/>">
+                                                       value="<spring:message code='bucket.add'/>">
                                             </form:form>
                                         </security:authorize>
 
@@ -371,7 +371,6 @@
                                                style="margin-top: 2%; padding: 2%; width:800px; height: 150px;">
                                             <thead>
                                             <tr>
-                                                <th>Id</th>
                                                 <th><spring:message code='bucket.name'/></th>
                                                 <th><spring:message code='bucket.description'/></th>
                                                 <th><spring:message code='bucket.price'/></th>
@@ -383,16 +382,20 @@
                                             <tbody>
                                             <c:forEach var="bucket" items="${bucketItems}">
                                                 <tr>
-                                                    <td>1${bucket.id}</td>
-                                                    <td>1${bucket.productId}</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-<%--                                                    <td><img--%>
-<%--                                                            src="data:image/jpg;base64,${bucket.encoded_image}"--%>
-<%--                                                            alt="image" style="width: 40%; height: 20%"></td>--%>
+                                                    <td>${bucket.product.name}</td>
+                                                    <td>${bucket.product.information}</td>
+                                                    <td>${bucket.product.price}</td>
+                                                    <td><img
+                                                            src="data:image/jpg;base64,${bucket.product.encodedImage}"
+                                                            alt="image" style="width: 40%; height: 20%"></td>
                                                     <td>${bucket.purchaseDate}</td>
-                                                    <td><a href="bucket?id= ${bucket.id}"><spring:message code='bucket.delete'/></a></td>
+                                                    <form:form action="${contextPath}/bucket" method="GET"
+                                                               enctype="multipart/form-data">
+                                                        <input type="hidden" value="${bucket.id}"
+                                                               class="form-control" name="bucketId">
+                                                        <td><a href="bucket?id= ${bucket.id}"><spring:message code='bucket.delete'/></a></td>
+                                                    </form:form>
+
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
