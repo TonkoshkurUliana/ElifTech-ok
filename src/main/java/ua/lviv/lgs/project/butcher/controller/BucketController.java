@@ -48,17 +48,17 @@ public class BucketController {
         bucket.setUser(user);
 
         bucketService.add(bucket);
-        return getBucketItems();
+        return new ModelAndView("redirect:/index#!/pageBucket");
     }
 
     @RequestMapping(value = "/bucket", method = RequestMethod.GET)
     public ModelAndView delete(@RequestParam String id) {
         bucketService.delete(new Bucket(Integer.parseInt(id.replaceAll("\\s",""))));
-        return getBucketItems();
+       return new ModelAndView("redirect:/index#!/pageBucket");
     }
 
     private ModelAndView getBucketItems() {
-        ModelAndView map = new ModelAndView("bucket");
+        ModelAndView map = new ModelAndView("index#!/pageBucket");
         map.addObject("bucketItems", bucketService.getAll());
         return map;
     }

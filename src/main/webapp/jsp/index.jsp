@@ -76,7 +76,9 @@
 
                 <div class="logoHolder">
                     <h1><a href="#!/pageHome" id="logo">Wheatland</a></h1>
-                    <p class="">people<br>service<br>meat</p>
+                    <p class=""><spring:message code='logo.word1'/>
+                        <br><spring:message code='logo.word2'/>
+                        <br><spring:message code='logo.word3'/></p>
                 </div>
                 <div class="menuHolder">
                     <nav class="menu">
@@ -89,15 +91,24 @@
                                     <div class="mText"><spring:message code='sidebar.about'/></div>
                                 </a></li>
                             </security:authorize>
-                            <li><a href="#!/pageDrinks">
-                                <div class="mText"><spring:message code='sidebar.drinks'/></div>
-                            </a></li>
 
-                            <li class="margmenu"><a href="#!/pageMeats">
-                                <div class="mText"><spring:message code='sidebar.meats'/></div>
-                            </a></li>
+                            <li class="with_ul"><a href="#">
+                                <div class="mText" style="opacity: 1;"><spring:message code='sidebar.cafe'/></div>
+                            </a>
+
+
+                                <ul class="submenu_1" style="display: none; visibility: visible;">
+                                    <li class="marTop"><a href="#!/pageDrinks">
+                                        <div class="mText"><spring:message code='sidebar.drinks'/></div>
+                                    </a></li>
+                                    <li class="marBot"><a href="#!/pageMeats">
+                                        <div class="mText"><spring:message code='sidebar.meats'/></div>
+                                    </a></li>
+                                </ul>
+                            </li>
+
                             <li><a href="#!/pageServices">
-                                <div class="mText"><spring:message code='sidebar.services'/></div>
+                                <div class="margmenu mText"><spring:message code='sidebar.services'/></div>
                             </a></li>
                             <security:authorize access="hasRole('ROLE_USER')">
                                 <li><a href="#!/pageBucket">
@@ -172,7 +183,7 @@
                                                                                     alt=""></a>
                                                 <h3 class="centr">${product.name}</h3>
                                                 <ul class="list2">
-                                                    <li><a href="#" class=""><strong>${product.information}</strong></a><span>...${product.price}</span>
+                                                    <li><a href="#" class=""><strong>${product.information}</strong></a><span>...${product.price}$</span>
                                                     </li>
                                                 </ul>
 
@@ -182,8 +193,8 @@
                                                                enctype="multipart/form-data">
                                                         <input type="hidden" value="${product.id}"
                                                                class="form-control" name="productId">
-                                                        <input type="submit" class="w3-button w3-block w3-dark-grey"
-                                                               value="+ <spring:message code='bucket.add'/>">
+                                                        <input type="submit" class="button-add"
+                                                               value="<spring:message code='bucket.add'/>">
                                                     </form:form>
                                                 </security:authorize>
 
@@ -342,19 +353,19 @@
                                                         <p class="date marg9"><strong>${product.price}$</strong></p>
                                                         <p class="">${product.information} </p>
                                                         </p>
+                                                        <security:authorize access="hasRole('ROLE_USER')">
+
+                                                            <form:form action="${contextPath}/bucket" method="POST"
+                                                                       enctype="multipart/form-data">
+                                                                <input type="hidden" value="${product.id}"
+                                                                       class="form-control" name="productId">
+                                                                <input type="submit" class="button-add"
+                                                                       value="<spring:message code='bucket.add'/>">
+                                                            </form:form>
+                                                        </security:authorize>
                                                     </div>
                                                 </div>
 
-                                                <security:authorize access="hasRole('ROLE_USER')">
-
-                                                    <form:form action="${contextPath}/bucket" method="POST"
-                                                               enctype="multipart/form-data">
-                                                        <input type="hidden" value="${product.id}"
-                                                               class="form-control" name="productId">
-                                                        <input type="submit" class="w3-button w3-block w3-dark-grey"
-                                                               value="<spring:message code='bucket.add'/>">
-                                                    </form:form>
-                                                </security:authorize>
 
                                                 <div class="clear"></div>
                                             </li>
@@ -375,7 +386,7 @@
                                         <table class="table table-striped"
                                                style="margin-top: 2%; padding: 2%; width:800px; height: 150px;">
                                             <thead>
-                                            <tr>
+                                            <tr style="text-align: center">
                                                 <th><spring:message code='bucket.name'/></th>
                                                 <th><spring:message code='bucket.description'/></th>
                                                 <th><spring:message code='bucket.price'/></th>
@@ -389,10 +400,10 @@
                                                 <tr>
                                                     <td>${bucket.product.name}</td>
                                                     <td>${bucket.product.information}</td>
-                                                    <td>${bucket.product.price}</td>
+                                                    <td>${bucket.product.price}$</td>
                                                     <td><img
                                                             src="data:image/jpg;base64,${bucket.product.encodedImage}"
-                                                            alt="image" style="width: 40%; height: 20%"></td>
+                                                            alt="image" style="width:100%"></td>
                                                     <td>${bucket.purchaseDate}</td>
                                                     <form:form action="${contextPath}/bucket" method="GET"
                                                                enctype="multipart/form-data">
@@ -420,7 +431,7 @@
                                 <h2 class="centr">Create product!</h2>
 
                                 <form:form method="POST" action="${contextPath}/addProduct"
-                                           enctype="multipart/form-data" style="margin:10%" id="form-create"
+                                           enctype="multipart/form-data" style="margin:3%" id="form-create"
                                            class="centr">
 
                                     <div class="form-group">
@@ -453,7 +464,7 @@
                                                placeholder="<spring:message code='product.file'/>">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary"><spring:message
+                                    <button type="submit" class="button-add" style="margin: 5px;width: 310px;"><spring:message
                                             code='product.submit'/></button>
 
                                     <input type="hidden" name="${_csrf.parameterName}"

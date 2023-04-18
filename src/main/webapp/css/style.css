@@ -39,7 +39,7 @@ header{position: absolute; width: 100%; height: 202px; z-index: 5;  margin: 0 au
 
 .menu{position:absolute; z-index:1; display: inline-block; top:-55px; left:29px;}
 #menu {z-index:3; position:relative; display: inline-block; }
-#menu > li{position:relative; color:#fff;  text-align: left; display: inline-block; float: left;  margin: 0 0px 0 72px; }
+#menu > li{position:relative; color:#fff;  text-align: left; display: inline-block; float: left;  margin: 0 0px 0 63px; }
 #menu > li:first-child {margin-left:0px;}
 #menu > li > a{  display: inline-block; position:relative;  overflow: hidden; text-transform:uppercase;}
 #menu > li > a:hover{text-decoration:none;}
@@ -76,7 +76,7 @@ header{position: absolute; width: 100%; height: 202px; z-index: 5;  margin: 0 au
 .pad0 {padding-bottom:0px !important;}
 .pad1 {padding-bottom:8px;}
 
-.margmenu { margin-left:280px !important; }
+.margmenu { margin-left:260px !important; }
 .marg0 {margin-left:0px !important;}
 
 
@@ -377,3 +377,32 @@ ul.list2 { margin-top:12px; }
  .list2 li span { font-size:13px; color:#fff; width:39px; }
 
  .list2 li a strong {font-size:13px; line-height:18px; color:#fff;}
+
+
+ .table-striped tr td{
+	 border: 1px solid #8f8882;
+	 background: url(../images/bg_form.png) 0 0 repeat;
+	 font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	 color: #fff;
+	 padding: 10px 10px 9px 10px;
+	 outline: medium none;
+	 width: 1288px;
+	 float: left;
+	 text-align: center;
+ }
+
+.table-striped tr td{
+	border: 1px solid #8f8882;
+	background: url(../images/bg_form.png) 0 0 repeat;
+	padding: 10px 10px 9px 10px;
+	outline: medium none;
+	float: none;
+}
+
+.button-add{
+	width: -webkit-fill-available;
+	background: url(../images/bg_form.png) 0 0 repeat;
+	color: #fff;
+	text-align: center;
+}
+
