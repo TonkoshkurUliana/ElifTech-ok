@@ -1,11 +1,11 @@
 
-1.	Створіть базу з назвою «».
-2.	Перевірте з’єднання з базою. 
+1.	Створіть базу з назвою «deliveryapp».
+2.	Перевірте з’єднання з базою.  
 Файл налаштування \src\main\resources\application.properties
 Налаштування до бази наступні:
 spring.datasource.username = root
 spring.datasource.password = 123456
-spring.datasource.url = jdbc:mysql://localhost:3306/deliveryApp
+spring.datasource.url = jdbc:mysql://localhost:3306/deliveryapp
 
 3.	Запустіть сервер та зайдіть на сторінку http://localhost:8080/
 4.	Зареєструйтесь.
