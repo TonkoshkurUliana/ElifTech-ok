@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Big Dave's Butcher Shop</title>
+    <title>Delivery App</title>
     <meta charset="utf-8">
     <link href='../images/favicon.ico' rel='shortcut icon'>
 
@@ -35,7 +35,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
     <div style=' clear: both; text-align:center; position: relative;'>
         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img
-                src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0"
+                src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg"
                 height="42" width="820"
                 alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."/></a>
     </div>
@@ -55,11 +55,16 @@
         });
     </script>
 </head>
-<body>
+<body style="min-height: 600px; overflow: auto;">
 <div class="glob">
-    <div id="bgStretch"><img src="images/gallery_big_01.jpg" alt=""></div>
+    <div style="width: 100%; height: 100%; position: fixed; left: 0px; top: 0px; overflow: hidden; z-index: -1;">
+        <div id="bgStretch"
+             style="position: absolute; z-index: -1; inset: 0px auto auto 0px; width: 1278.2px; height: 664px; opacity: 1;">
+            <img src="images/gallery_big_01.jpg" alt=""
+                 style="width: 100%; height: 100%; position: absolute; z-index: -1; left: 0px; top: 0px;"></div>
+    </div>
 
-    <div class="page_spinner"><span></span></div>
+    <div class="page_spinner" style="display: none;"><span></span></div>
     <div class="pagin">
         <ul>
             <li><a href="images/gallery_big_01.jpg"></a></li>
@@ -73,56 +78,28 @@
     <header>
         <div class="headerHolder">
             <div class="container_24">
-
-                <div class="logoHolder">
-                    <h1><a href="#!/pageHome" id="logo">Wheatland</a></h1>
-                    <p class=""><spring:message code='logo.word1'/>
-                        <br><spring:message code='logo.word2'/>
-                        <br><spring:message code='logo.word3'/></p>
-                </div>
                 <div class="menuHolder">
                     <nav class="menu">
                         <ul id="menu">
-                            <li><a href="#!/pageHome">
+                            <li class="active"><a href="#!/pageHome">
                                 <div class="mText"><spring:message code='sidebar.home'/></div>
                             </a></li>
-                            <security:authorize access="hasRole('ROLE_USER')">
-                                <li class="with_ul"><a href="#!/pageAbout">
-                                    <div class="mText"><spring:message code='sidebar.about'/></div>
-                                </a></li>
-                            </security:authorize>
-
-                            <li class="with_ul"><a href="#">
-                                <div class="mText" style="opacity: 1;"><spring:message code='sidebar.cafe'/></div>
-                            </a>
-
-
-                                <ul class="submenu_1" style="display: none; visibility: visible;">
-                                    <li class="marTop"><a href="#!/pageDrinks">
-                                        <div class="mText"><spring:message code='sidebar.drinks'/></div>
-                                    </a></li>
-                                    <li class="marBot"><a href="#!/pageMeats">
-                                        <div class="mText"><spring:message code='sidebar.meats'/></div>
-                                    </a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="#!/pageServices">
-                                <div class="margmenu mText"><spring:message code='sidebar.services'/></div>
+                            <li class="with_ul"><a href="#!/pageMc">
+                                <div class="mText" style="opacity: 1;"><spring:message code='sidebar.shops'/></div>
                             </a></li>
+
+                            <li><a href="#!/pageCoupons">
+                                <div class="mText" style="opacity: 1;"><spring:message code='sidebar.coupons'/></div>
+                            </a></li>
+
                             <security:authorize access="hasRole('ROLE_USER')">
                                 <li><a href="#!/pageBucket">
                                     <div class="mText"><spring:message code='sidebar.bucket'/></div>
                                 </a></li>
-                                <li><a href="#!/pageContact">
-                                    <div class="mText"><spring:message code='sidebar.contacts'/></div>
-                                </a></li>
                             </security:authorize>
-                            <security:authorize access="hasRole('ROLE_ADMIN')">
-                                <li><a href="#!/pageCreate">
-                                    <div class="mText"><spring:message code='sidebar.create'/></div>
-                                </a></li>
-                            </security:authorize>
+                            <li><a href="#!/pageCreate">
+                                <div class="mText"><spring:message code='sidebar.create'/></div>
+                            </a></li>
                         </ul>
                     </nav>
                 </div>
@@ -137,7 +114,6 @@
         <div class="center">
             <!--content -->
             <article id="content">
-
                 <ul>
                     <li id="pageHome">
                         <div class="slideshow">
@@ -147,57 +123,40 @@
                             </div>
                         </div>
                     </li>
-                    <li id="pageAbout">
+                    <li id="pageMc" style="left: 1700px; display: none;">
                         <div class="container_24">
-                            <div class="grid_24">
-                                <h2 class="centr">Welcome!</h2>
-                                <div class="line-1 marg1"></div>
+                            <div class="grid_8 ">
+                                <h2 class="centr">Shop</h2>
+                                <div class="line-2"></div>
+                                <dl id="accordion">
+                                    <dt><a href="#!/pageMc">McDonald's<span></span></a></dt>
+                                    <dt><a href="#!/pageKFC">KFC<span></span></a></dt>
+                                </dl>
                             </div>
-                            <div class="grid_24">
-                                <p class="tright marg2">We can service or repair your motorcycle. Wash the bike at the
-                                    car wash. We provide motorcycle school services.
-                                    Choose the services you need and come to us, you can also reserve a time, make a
-                                    pre-order or clarify the cost.</p>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </li>
-
-                    <li id="pageDrinks">
-                        <div class="container_24">
-                            <div class="grid_24">
-                                <h2 class="centr">drinks</h2>
+                            <div class="grid_16">
+                                <h2 class="centr" style="margin-bottom: 10px">McDonald's</h2>
                                 <div class="line-1 marg1"></div>
-                                <p class="centr marg2">Praesent vestibulum aenean nonummy hendrerit mauris. Hasellus
-                                    porta. Fusce suscipit varius mi. Cum sociis natoque penatibus magnis dis parturient
-                                    montes <br>nascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. Morbi
-                                    nunc odio gravida. at cursus nec luctus a lorem. <br>
-                                    Maecenas tristique orci ac sem. Duis ultricies pharetra magna. Donec accumsan
-                                    malesuada orci. Donec sit amet eros. Lorem ipsum dolor sit amet, consect</p>
                                 <ul id="mycarousel-3" class="jcarousel-skin-tango3">
                                     <c:forEach var="product" items="${products}">
-                                        <c:if test="${product.category == 'drink'}">
+                                        <c:if test="${product.category == 'Mc'}">
                                             <li>
                                                 <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span
-                                                        class="zoomSp2"></span><img src="images/page4_img_05.png"
-                                                                                    alt=""></a>
+                                                        class="zoomSp2"></span><img
+                                                        src="data:image/jpg;base64,${product.encodedImage}"
+                                                        alt="image" style="width:100%"></a>
                                                 <h3 class="centr">${product.name}</h3>
                                                 <ul class="list2">
                                                     <li><a href="#" class=""><strong>${product.information}</strong></a><span>...${product.price}$</span>
                                                     </li>
                                                 </ul>
 
-                                                <security:authorize access="hasRole('ROLE_USER')">
-
-                                                    <form:form action="${contextPath}/bucket" method="POST"
-                                                               enctype="multipart/form-data">
-                                                        <input type="hidden" value="${product.id}"
-                                                               class="form-control" name="productId">
-                                                        <input type="submit" class="button-add"
-                                                               value="<spring:message code='bucket.add'/>">
-                                                    </form:form>
-                                                </security:authorize>
-
+                                                <form:form action="${contextPath}/bucket" method="POST"
+                                                           enctype="multipart/form-data">
+                                                    <input type="hidden" value="${product.id}"
+                                                           class="form-control" name="productId">
+                                                    <input type="submit" class="button-add"
+                                                           value="<spring:message code='bucket.add'/>">
+                                                </form:form>
                                                 <div class="clear"></div>
                                             </li>
                                         </c:if>
@@ -208,153 +167,67 @@
                             <div class="clear"></div>
                         </div>
                     </li>
-                    <li id="pageMeats">
-
+                    <li id="pageKFC" style="left: 1700px; display: none;">
                         <div class="container_24">
-                            <div class="grid_15">
-                                <h2 class="centr">main dining room</h2>
-                                <div class="line-1 marg6"></div>
-                                <p class="centr marg2">Hasellus porta. Fusce suscipit varius mi. Cum sociis natoque
-                                    penatibus magnis dis parturient <br>montes nascetur ridiculus mus. Nulla dui. Fusce
-                                    feugiat malesuada odio.<br> Morbi nunc odio gravida. at cursus nec luctus a lorem.
-                                    Maecenas tristique orci ac sem. <br>Duis ultricies pharetra magna. </p>
-                                <img src="images/page3_img_01.png" class="fleft marg5" alt="">
-                                <img src="images/page3_img_02.png" class="fleft marg7" alt="">
-                                <img src="images/page3_img_03.png" class="fleft marg7" alt="">
-
-                                <div class="clear"></div>
-                                <div class="box-1">
-                                    <p class="tright">Breakfast 7:30 a.m. - 9:30 a.m.<br>Continental Breakfast 9:30 a.m.
-                                        - 11:00 a.m.</p>
-
-                                </div>
-                                <div class="box-2">
-                                    <p class="tleft">Luncheon 12:00 p.m. - 2:00 p.m.<br>Dinner Five-course 6:30 p.m. –
-                                        8:45 p.m. </p>
-                                </div>
-                                <div class="clear"></div>
-
-                            </div>
-                            <div class="grid_8 prefix_1">
-                                <h2 class="centr">menu</h2>
+                            <div class="grid_8 ">
+                                <h2 class="centr">Shop</h2>
                                 <div class="line-2"></div>
 
-                                <dl id="accordion">
-                                    <dt><a href="#">Breakfast Menu<span></span></a></dt>
-
-                                    <dd>
-                                        <div class="indent">
-                                            <ul class="list1">
-                                                <li><a href="#" class=" "><strong>Lorem ipsum dolor</strong></a><span>$12.45</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Praesent vestibulum molestie</strong></a><span>$08.00</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Aenean nonummy
-                                                    hendrerit</strong></a><span>$15.25</span><em>&nbsp;</em></li>
-                                                <li><a href="#" class=" "><strong>Vivamus eget nibh</strong></a><span>$10.43</span><em>&nbsp;</em>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dd>
-                                    <dt><a href="#">dinner menu 1<span></span></a></dt>
-                                    <dd>
-                                        <div class="indent">
-                                            <ul class="list1">
-                                                <li><a href="#" class=" "><strong>Lorem ipsum dolor</strong></a><span>$12.45</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Praesent vestibulum molestie</strong></a><span>$08.00</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Aenean nonummy
-                                                    hendrerit</strong></a><span>$15.25</span><em>&nbsp;</em></li>
-                                                <li><a href="#" class=" "><strong>Vivamus eget nibh</strong></a><span>$10.43</span><em>&nbsp;</em>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dd>
-                                    <dt><a href="#">dinner menu 2<span></span></a></dt>
-                                    <dd>
-                                        <div class="indent">
-                                            <ul class="list1">
-                                                <li><a href="#" class=" "><strong>Lorem ipsum dolor</strong></a><span>$12.45</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Praesent vestibulum molestie</strong></a><span>$08.00</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Aenean nonummy
-                                                    hendrerit</strong></a><span>$15.25</span><em>&nbsp;</em></li>
-                                                <li><a href="#" class=" "><strong>Vivamus eget nibh</strong></a><span>$10.43</span><em>&nbsp;</em>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dd>
-                                    <dt><a href="#">dinner menu 3<span></span></a></dt>
-                                    <dd>
-                                        <div class="indent">
-                                            <ul class="list1">
-                                                <li><a href="#" class=" "><strong>Lorem ipsum dolor</strong></a><span>$12.45</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Praesent vestibulum molestie</strong></a><span>$08.00</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Aenean nonummy
-                                                    hendrerit</strong></a><span>$15.25</span><em>&nbsp;</em></li>
-                                                <li><a href="#" class=" "><strong>Vivamus eget nibh</strong></a><span>$10.43</span><em>&nbsp;</em>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dd>
-                                    <dt><a href="#">children's menu<span></span></a></dt>
-                                    <dd>
-                                        <div class="indent">
-                                            <ul class="list1">
-                                                <li><a href="#" class=" "><strong>Lorem ipsum dolor</strong></a><span>$12.45</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Praesent vestibulum molestie</strong></a><span>$08.00</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Aenean nonummy
-                                                    hendrerit</strong></a><span>$15.25</span><em>&nbsp;</em></li>
-                                                <li><a href="#" class=" "><strong>Vivamus eget nibh</strong></a><span>$10.43</span><em>&nbsp;</em>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dd>
-                                    <dt><a href="#">dessert menu<span></span></a></dt>
-                                    <dd>
-                                        <div class="indent">
-                                            <ul class="list1">
-                                                <li><a href="#" class=" "><strong>Lorem ipsum dolor</strong></a><span>$12.45</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Praesent vestibulum molestie</strong></a><span>$08.00</span><em>&nbsp;</em>
-                                                </li>
-                                                <li><a href="#" class=" "><strong>Aenean nonummy
-                                                    hendrerit</strong></a><span>$15.25</span><em>&nbsp;</em></li>
-                                                <li><a href="#" class=" "><strong>Vivamus eget nibh</strong></a><span>$10.43</span><em>&nbsp;</em>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </dd>
+                                <dl id="accordion-1">
+                                    <dt><a href="#!/pageMc">McDonald's<span></span></a></dt>
+                                    <dt><a href="#!/pageKFC">KFC<span></span></a></dt>
                                 </dl>
-
-
                             </div>
+                            <div class="grid_16">
+                                <h2 class="centr" style="margin-bottom: 10px">KFC</h2>
+                                <div class="line-1 marg1"></div>
+                                <ul id="mycarousel-2" class="jcarousel-skin-tango3">
+                                    <c:forEach var="product" items="${products}">
+                                        <c:if test="${product.category == 'KFC'}">
+                                            <li>
+                                                <a class="fancyPic2" rel="Appendix" href="images/image-blank.png"><span
+                                                        class="zoomSp2"></span><img
+                                                        src="data:image/jpg;base64,${product.encodedImage}"
+                                                        alt="image" style="width:100%"></a>
+                                                <h3 class="centr">${product.name}</h3>
+                                                <ul class="list2">
+                                                    <li><a href="#" class=""><strong>${product.information}</strong></a><span>...${product.price}$</span>
+                                                    </li>
+                                                </ul>
+
+                                                <form:form action="${contextPath}/bucket" method="POST"
+                                                           enctype="multipart/form-data">
+                                                    <input type="hidden" value="${product.id}"
+                                                           class="form-control" name="productId">
+                                                    <input type="submit" class="button-add"
+                                                           value="<spring:message code='bucket.add'/>">
+                                                </form:form>
+                                                <div class="clear"></div>
+                                            </li>
+                                        </c:if>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+
+                            <div class="clear"></div>
                         </div>
                     </li>
-                    <li id="pageServices">
+                    <li id="pageCoupons" style="left: -1700px; display: none;">
                         <div class="container_24">
                             <div class="grid_24">
                                 <h2 class="centr">recent events</h2>
                                 <div class="line-1 marg1"></div>
                                 <ul id="mycarousel-4" class="jcarousel-skin-tango4">
                                     <c:forEach var="product" items="${products}">
-                                        <c:if test="${product.category == 'service'}">
+                                        <c:if test="${product.category == 'coupons'}">
                                             <li>
                                                 <div class="wrap">
-                                                    <img src="images/page5_img_01.png" class="img-indent" alt="">
+                                                    <img src="data:image/jpg;base64,${product.encodedImage}" class="img-indent" alt="">
                                                     <div class="extra-wrap">
                                                         <h3 class="marg5">${product.name}</h3>
                                                         <p class="date marg9"><strong>${product.price}$</strong></p>
                                                         <p class="">${product.information} </p>
                                                         </p>
-                                                        <security:authorize access="hasRole('ROLE_USER')">
-
                                                             <form:form action="${contextPath}/bucket" method="POST"
                                                                        enctype="multipart/form-data">
                                                                 <input type="hidden" value="${product.id}"
@@ -362,25 +235,67 @@
                                                                 <input type="submit" class="button-add"
                                                                        value="<spring:message code='bucket.add'/>">
                                                             </form:form>
-                                                        </security:authorize>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="clear"></div>
                                             </li>
                                         </c:if>
                                     </c:forEach>
                                 </ul>
                             </div>
-
                             <div class="clear"></div>
                         </div>
                     </li>
-
                     <li id="pageBucket">
                         <div class="container_24">
-                            <div class="grid_24">
+                            <div class="grid_8 ">
+                                <form id="form">
+                                    <fieldset>
+                                        <label class="name">
+                                            <input type="text" value="Name:">
+                                            <span class="error error-empty" style="display: none;">*This is not a valid name.</span><span
+                                                class="empty error-empty" style="display: none;">*This field is required.</span>
+                                        </label>
+
+                                        <label class="email">
+                                            <input type="tel" value="E-mail:">
+                                            <span class="error error-empty" style="display: none;">*This is not a valid email address.</span><span
+                                                class="empty error-empty" style="display: none;">*This field is required.</span>
+                                        </label>
+
+                                        <label class="phone">
+                                            <input type="text" value="Phone:">
+                                            <span class="error error-empty" style="display: none;">*This is not a valid phone number.</span><span
+                                                class="empty error-empty" style="display: none;">*This field is required.</span>
+                                        </label>
+
+                                        <label class="message">
+                                            <textarea>Message:</textarea>
+                                            <span class="error" style="display: none;">*The message is too short.</span>
+                                            <span class="empty" style="display: none;">*This field is required.</span>
+                                        </label>
+
+                                        <div class="btns">
+                                            <a data-type="reset" class="button-1">clear</a>
+
+                                            <form:form action="${contextPath}/bucket-send" method="POST"
+                                                       enctype="multipart/form-data">
+                                                <input type="hidden" value="${bucket.id}"
+                                                       class="form-control" name="bucketId">
+                                                <a data-type="submit" class="button-1">send</a>
+                                            </form:form>
+
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </fieldset>
+                                    <div class="success" style="display: none;">Contact form submitted! <br><strong>We
+                                        will be in touch
+                                        soon.</strong>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="grid_16">
                                 <div style="margin-left: 10%">
                                     <div class="w3-container">
                                         <table class="table table-striped"
@@ -391,6 +306,7 @@
                                                 <th><spring:message code='bucket.description'/></th>
                                                 <th><spring:message code='bucket.price'/></th>
                                                 <th><spring:message code='bucket.image'/></th>
+                                                <th><spring:message code='bucket.count'/></th>
                                                 <th><spring:message code='bucket.date'/></th>
                                                 <th><spring:message code='bucket.action'/></th>
                                             </tr>
@@ -404,6 +320,7 @@
                                                     <td><img
                                                             src="data:image/jpg;base64,${bucket.product.encodedImage}"
                                                             alt="image" style="width:100%"></td>
+                                                    <td><input type="number" value="1"></td>
                                                     <td>${bucket.purchaseDate}</td>
                                                     <form:form action="${contextPath}/bucket" method="GET"
                                                                enctype="multipart/form-data">
@@ -412,7 +329,6 @@
                                                         <td><a href="bucket?id= ${bucket.id}"><spring:message
                                                                 code='bucket.delete'/></a></td>
                                                     </form:form>
-
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
@@ -423,7 +339,6 @@
                             </div>
                         </div>
                     </li>
-
 
                     <li id="pageCreate">
                         <div class="container_24">
@@ -464,8 +379,9 @@
                                                placeholder="<spring:message code='product.file'/>">
                                     </div>
 
-                                    <button type="submit" class="button-add" style="margin: 5px;width: 310px;"><spring:message
-                                            code='product.submit'/></button>
+                                    <button type="submit" class="button-add" style="margin: 5px;width: 310px;">
+                                        <spring:message
+                                                code='product.submit'/></button>
 
                                     <input type="hidden" name="${_csrf.parameterName}"
                                            value="${_csrf.token}"/>
@@ -473,70 +389,8 @@
                             </div>
                         </div>
                     </li>
-                    <li id="pageContact">
-                        <div class="container_24">
-                            <div class="grid_15">
-                                <h2 class="centr">how to find us</h2>
-                                <div class="line-1 marg6"></div>
-                                <figure class="google_map"></figure>
-                                <dl>
-                                    <dd class="pad1"><p class="">Hasellus porta. Fusce suscipit varius mi. Cum sociis
-                                        natoque
-                                        penatibus magnis dis parturient montes nascetur ridiculus mus. Nulla dui. Fusce
-                                        feugiat
-                                        malesuada odio. Morbi nunc odio gravida. at cursus nec luctus a lorem. </p></dd>
-                                    <dd class=""><p class=""><strong>8901 Marmora Road,<br>Glasgow, D04 89GR.</strong>
-                                    </p></dd>
-                                    <dd><span>Freephone:</span>+1 800 559 6580</dd>
-                                    <dd><span>Telephone:</span>+1 800 603 6035</dd>
-                                    <dd><span>FAX:</span>+1 800 889 9898</dd>
-                                    <dd>E-mail:&nbsp;<a href="#" class="link3">mail@demolink.org</a></dd>
-                                </dl>
 
-                            </div>
-                            <div class="grid_8 prefix_1">
-                                <h2 class="centr">feedback</h2>
-                                <div class="line-2"></div>
-                                <form id="form">
-
-                                    <fieldset>
-                                        <label class="name">
-                                            <input type="text" value="Name:">
-                                            <span class="error error-empty">*This is not a valid name.</span><span
-                                                class="empty error-empty">*This field is required.</span> </label>
-
-                                        <label class="email">
-                                            <input type="tel" value="E-mail:">
-                                            <span class="error error-empty">*This is not a valid email address.</span><span
-                                                class="empty error-empty">*This field is required.</span> </label>
-
-                                        <label class="phone">
-                                            <input type="text" value="Phone:">
-                                            <span class="error error-empty">*This is not a valid phone number.</span><span
-                                                class="empty error-empty">*This field is required.</span> </label>
-
-                                        <label class="message">
-                                            <textarea>Message:</textarea>
-                                            <span class="error">*The message is too short.</span> <span class="empty">*This field is required.</span>
-                                        </label>
-
-                                        <div class="btns">
-                                            <a data-type="reset" class="button-1">clear</a><a data-type="submit"
-                                                                                              class="button-1">send</a>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </fieldset>
-                                    <div class="success">Contact form submitted! <br><strong>We will be in touch
-                                        soon.</strong>
-                                    </div>
-                                </form>
-
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </li>
-                    <li id="pagePrivacy">
+                    <li id="pagePrivacy" style="left: -1700px; display: none;">
                         <div class="container_24">
                             <div class="grid_24">
                                 <h2 class="centr">privacy policy</h2>
@@ -589,7 +443,7 @@
                             </div>
                         </div>
                     </li>
-                    <li id="pageMore">
+                    <li id="pageMore" style="left: -1700px; display: none;">
                         <div class="container_24">
                             <div class="grid_24">
                                 <h2 class="centr">Lorem ipsum</h2>
@@ -649,12 +503,12 @@
 
 
     <!--footer -->
-    <footer>
+    <footer style="background-position: 0px 0px;">
         <div class="foot-bg">
             <div class="mainFooter">
                 <div class="privHold">
-                <pre class="textPrivacy"><span>Big Dave's Butcher Shop</span>|  2023  |  <a class="_link1"
-                                                                                            href="#!/pagePrivacy">Privacy Policy</a>&nbsp;
+                <pre class="textPrivacy"><span>Delivery app</span>|  2023  |  <a class="_link1"
+                                                                                 href="#!/pagePrivacy">Privacy Policy</a>&nbsp;
                     <!-- {%FOOTER_LINK} --></pre>
                 </div>
             </div>
@@ -669,5 +523,27 @@
     })
 </script>
 <!-- Coded by Hunter -->
+
+<div id="fancybox-tmp"></div>
+<div id="fancybox-loading">
+    <div></div>
+</div>
+<div id="fancybox-overlay"></div>
+<div id="fancybox-wrap">
+    <div id="fancybox-outer">
+        <div class="fancybox-bg" id="fancybox-bg-n"></div>
+        <div class="fancybox-bg" id="fancybox-bg-ne"></div>
+        <div class="fancybox-bg" id="fancybox-bg-e"></div>
+        <div class="fancybox-bg" id="fancybox-bg-se"></div>
+        <div class="fancybox-bg" id="fancybox-bg-s"></div>
+        <div class="fancybox-bg" id="fancybox-bg-sw"></div>
+        <div class="fancybox-bg" id="fancybox-bg-w"></div>
+        <div class="fancybox-bg" id="fancybox-bg-nw"></div>
+        <div id="fancybox-content"></div>
+        <a id="fancybox-close"></a>
+        <div id="fancybox-title"></div>
+        <a href="javascript:" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a
+            href="javascript:" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a></div>
+</div>
 </body>
 </html>

@@ -107,7 +107,6 @@ ul #mycarousel-2 li {position:relative;}
 
 #mycarousel-3 { }
 
-
 .jcarousel-skin-tango3 { padding:0px 0 0px 0px; margin-top:-2px; }
 
 
@@ -126,6 +125,8 @@ ul #mycarousel-2 li {position:relative;}
 }
 
 ul #mycarousel-3 li {position:relative;}
+
+ul #mycarousel-3-1 li {position:relative;}
 
 
 /*HORIZONTAL*/
